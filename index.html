@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JURNAL MATEMATIKA</title>
+</head>
+<body>
+    <div class="background">
+        <div class="card">
+            <div class="display">
+                <input type="text" disabled name="displayonload" id="displayonload" style="height: 70%; width: 100%; text-align: end; font-size: xx-large; border: none; background-color: #e2d9dc;">
+                <input type="text" disabled name="hasil" id="hasil" style="height: 30%; width: 100%; text-align: end; border: none; background-color: #e2d9dc;">
+            </div>
+            <div class="tombol">
+                <div class="number" onclick="tombol('1')"><h1>1</h1></div>
+                <div class="number" onclick="tombol('2')"><h1>2</h1></div>
+                <div class="number" onclick="tombol('3')"><h1>3</h1></div>
+                <div class="number" onclick="tombol('4')"><h1>4</h1></div>
+                <div class="number" onclick="tombol('5')"><h1>5</h1></div>
+                <div class="number" onclick="tombol('6')"><h1>6</h1></div>
+                <div class="number" onclick="tombol('7')"><h1>7</h1></div>
+                <div class="number" onclick="tombol('8')"><h1>8</h1></div>
+                <div class="number" onclick="tombol('9')"><h1>9</h1></div>
+                <div class="number" onclick="tombol('00')"><h1>00</h1></div>
+                <div class="number" onclick="tombol('0')"><h1>0</h1></div>
+                <div class="number" onclick="tombol('.')"><h1>,</h1></div>
+
+                <div class="number" onclick="hapus()"><h1>CE</h1></div>
+                <div class="number" onclick="tombol('%')"><h1>%</h1></div>
+                <div class="number" onclick="tombol('÷')"><h1>&divide;</h1></div>
+                <div class="number" onclick="tombol('x')"><h1>X</h1></div>
+                <div class="number" onclick="tombol('-')"><h1>-</h1></div>
+                <div class="number" onclick="tombol('+')"><h1>+</h1></div>
+                <div class="number" onclick="samadengan()"><h1>=</h1></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function tombol(value) {
+        event.preventDefault();
+
+        document.getElementById("displayonload").value += value;
+    }
+
+    function hapus() {
+        document.getElementById('displayonload').value = '';
+        document.getElementById('hasil').value = '';
+    }
+
+    function result() {
+        var result = document.getElementById('displayonload').value;
+        var calc = eval(result);
+        document.getElementById('displayonload').value = calc;
+    }
+
+    function samadengan() {
+        var display = document.getElementById("displayonload").value;
+        
+        
+
+        if (display.includes("+")) {
+            var arrayangka = display.split("+");
+            var a = parseInt(arrayangka[0].trim());
+            var b = parseInt(arrayangka[1].trim());
+
+            var hasil = a + b;
+            document.getElementById('hasil').value = hasil;
+        }else if (display.includes("-")) {
+            var arrayangka = display.split("-");
+            var a = parseInt(arrayangka[0].trim());
+            var b = parseInt(arrayangka[1].trim());
+            
+            var hasil = a - b;
+            document.getElementById('hasil').value = hasil;
+            
+        }
+        else if (display.includes("x")) {
+            var arrayangka = display.split("x");
+            var a = parseInt(arrayangka[0].trim());
+            var b = parseInt(arrayangka[1].trim());
+            
+            var hasil = a * b;
+            document.getElementById('hasil').value = hasil;
+            
+        }
+        else if (display.includes("÷")) {
+            var arrayangka = display.split("÷");
+            var a = parseInt(arrayangka[0].trim());
+            var b = parseInt(arrayangka[1].trim());
+            
+            var hasil = a / b;
+            document.getElementById('hasil').value = hasil;
+            
+        }
+        else if (display.includes("%")) {
+            var arrayangka = display.split("%");
+            var a = parseInt(arrayangka[0].trim());
+            var b = parseInt(arrayangka[1].trim());
+            
+            var hasil = a * 0.01 ;
+            document.getElementById('hasil').value =  hasil;
+            
+        }
+        else {
+            document.getElementById('hasil').value = "error";
+        }
+    }
+
+</script>
+
+<style>
+    html,body{
+        margin: 0px;
+    }
+
+    .background{
+        background: #fff;
+        background-position: center;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card{
+        height: 60%;
+        width: clamp(200px, 75%, 250px);
+        border: 1px solid #252525;
+        border-radius: 20px;
+        background-color: #22191c;
+        display: grid;
+        grid-template-areas: 
+        "display display display display"
+        "tombol tombol tombol tombol"
+        "tombol tombol tombol tombol"
+        "tombol tombol tombol tombol"
+        "tombol tombol tombol tombol"
+        ;
+        padding: 20px;
+        gap: 20px;
+        grid-template-rows: 50px auto 50px;
+        box-shadow: 20px 20px 50px black;
+    }
+
+    .display{
+        grid-area: display;
+        background-color: #e2d9dc;
+    }
+
+    .tombol{
+        grid-area: tombol;
+        display: grid;
+        grid-template-areas: 
+        "clear clear persen satu"
+        "a b c dua"
+        "d e f tiga"
+        "g h i empat"
+        "j k l lima"
+        ;
+    }
+
+    .number:nth-child(13){background-color: #6a5051;color: #e2d9dc; border-radius: 10px; width: 120px; height: 50px; font-size: small; text-align: center; grid-area: clear;}
+    .number:nth-child(14){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: persen;}
+    .number:nth-child(15){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: satu;}
+    .number:nth-child(16){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: dua;}
+    .number:nth-child(17){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: tiga;}
+    .number:nth-child(18){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: empat;}
+    .number:nth-child(19){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: lima;}
+    
+    
+    .number:nth-child(1){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: a;}
+    .number:nth-child(2){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: b;}
+    .number:nth-child(3){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: c;}
+    .number:nth-child(4){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: d;}
+    .number:nth-child(5){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: e;}
+    .number:nth-child(6){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: f;}
+    .number:nth-child(7){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: g;}
+    .number:nth-child(8){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: h;}
+    .number:nth-child(9){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: i;}
+    .number:nth-child(10){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: j;}
+    .number:nth-child(11){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: k;}
+    .number:nth-child(12){background-color: #6a5051;color: #e2d9dc; border-radius: 50%; width: 50px; height: 50px; font-size: small; text-align: center; grid-area: l;}
+
+</style>
+
+<style>
+    .number:nth-child(13):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(14):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(15):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(16):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(17):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(18):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(19):hover{background-color: #e2d9dc; color: #2f2324;}
+    
+    
+    .number:nth-child(1):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(2):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(3):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(4):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(5):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(6):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(7):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(8):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(9):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(10):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(11):hover{background-color: #e2d9dc; color: #2f2324;}
+    .number:nth-child(12):hover{background-color: #e2d9dc; color: #2f2324;}
+
+</style>
